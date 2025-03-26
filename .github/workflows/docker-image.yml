@@ -1,0 +1,15 @@
+name: Run docker
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:    
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run docker
+      run: docker run -i -e GIT_REPO=${{ secrets.GIT_REPO }} $(docker build -q src/FakeGitHistory)
